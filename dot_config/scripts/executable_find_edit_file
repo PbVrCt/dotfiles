@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    files_list=$(fdfind -t f -H -u -E .git -a --max-depth 1 --base-directory "$HOME" . ; )
+    # dirs=( "$HOME/projects" "$HOME/.config" )
+    dirs=( "$HOME/projects" "$HOME/.config/scripts" )
+    for dir in "${dirs[@]}"; do
+      files_list+=$'\n'$(fdfind -t f -H -u -E .git -a --base-directory "$dir" . ; )
+    done
+    selected=$(echo "$files_list" | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+if [[ -n "$TMUX" ]]; then
+    tmux rename-window "$(basename "$selected")"
+fi
+
+if [[ -w $selected ]]; then
+    $EDITOR "$selected"
+else
+    sudo $EDITOR "$selected"
+fi

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+selected=`cat ~/.config/cheat/.tmux_cht_languages ~/.config/cheat/.tmux_cht_command | fzf`
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+read -p "Enter Query: " query
+query=`echo $query | tr ' ' '+'`
+
+if grep -qs "$selected" ~/.config/cheat/.tmux_cht_languages; then
+    response=$(curl -s "cht.sh/$selected/$query")
+else
+    response=$(curl -s "cht.sh/$selected~$query")
+fi
+
+strip_ansi_escape_codes() {
+    echo -e "$(echo "$1" | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g')"
+}
+clean_response=$(strip_ansi_escape_codes "$response")
+
+echo "$clean_response" > /tmp/tmux_cht_result
+$EDITOR /tmp/tmux_cht_result
+rm /tmp/tmux_cht_result

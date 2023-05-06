@@ -1,0 +1,35 @@
+// Place your key bindings in this file to override the defaults
+[
+{
+    "key": "ctrl+;",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+},
+{
+    "key": "ctrl+j",
+    "command": "workbench.action.focusFirstEditorGroup"
+},
+{
+    "key": "ctrl+1",
+    "command": "-workbench.action.focusFirstEditorGroup"
+},
+{
+    "key": "ctrl+`",
+    "command": "-workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+},
+{
+    "key": "ctrl+j",
+    "command": "-workbench.action.togglePanel"
+},
+{
+    "key": "ctrl+k ctrl+h",
+    "command": "-workbench.action.output.toggleOutput",
+    "when": "workbench.panel.output.active"
+},
+{
+    "key": "ctrl+c",
+    "command": "-extension.vim_ctrl+c",
+    "when": "editorTextFocus && vim.active && vim.overrideCtrlC && vim.use<C-c> && !inDebugRepl"
+},
+]
