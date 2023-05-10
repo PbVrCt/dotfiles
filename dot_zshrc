@@ -43,6 +43,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Enable Zsh's vi mode
 bindkey -v
+KEYTIMEOUT=1
 
 # Configure Zhs's vi mode to yank to the system clipboard
 # https://unix.stackexchange.com/a/390523

@@ -53,6 +53,8 @@
         }
     },
     "workbench.statusBar.visible": false,
+    "aws.telemetry": false,
+    "interactiveWindow.restore": true,
     // "remote.SSH.defaultForwardedPorts": [
     //     {
     //         "localPort": 9002,
