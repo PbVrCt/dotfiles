@@ -55,6 +55,10 @@
     "workbench.statusBar.visible": false,
     "aws.telemetry": false,
     "interactiveWindow.restore": true,
+    "aws.suppressPrompts": {
+        "regionAddAutomatically": true
+    },
+    "editor.formatOnSave": true,
     // "remote.SSH.defaultForwardedPorts": [
     //     {
     //         "localPort": 9002,

@@ -31,11 +31,18 @@ export PATH=$ANDROID_SDK:$PATH
 export FLUTTER=$ANDROID/flutter
 export PATH=$FLUTTER/bin:$PATH
 
+# Add cargo to path
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # Set up oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=powerlevel10k/powerlevel10k
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
+
+# Add rbenv to path, for Ruby on Rails
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # Configure the zsh-autosuggestions plugin
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
@@ -77,6 +84,24 @@ local paste_widgets=(
 )
 x11-clip-wrap-widgets copy $copy_widgets
 x11-clip-wrap-widgets paste  $paste_widgets
+
+# Change cursor shape for different vi modes.
+# Source: https://www.reddit.com/r/vim/comments/mxhcl4/comment/gvqn9ok/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+function zle-keymap-select () {
+    case $KEYMAP in
+    vicmd) echo -ne '\e[1 q';; # block
+    viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins 
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' 
+preexec() { echo -ne '\e[5 q' ;}
+
 
 # Enable fzf history search with ctrl+r
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
