@@ -35,7 +35,7 @@ riverctl spawn "foot --app-id='tmux_term' -e tmux"
 riverctl rule-add -app-id firefox tags 2
 riverctl spawn "firefox"
 riverctl rule-add -app-id notes_term tags 4
-riverctl spawn "foot --app-id='notes_term' -e sh -c 'cd ~/vault/ && hx SoT/Reminders.md'" 
+riverctl spawn "foot --app-id='notes_term' -e sh -c 'cd ~/vault/ && hx Systems.md'" 
 riverctl set-focused-tags 1
 
 # Scratchpad apps 
@@ -61,30 +61,30 @@ riverctl map normal Mod1 E spawn 'sh -c "riverctl toggle-focused-tags 128; river
 riverctl rule-add -title chat_term tags 256 # 0100000000
 riverctl rule-add -title chat_term float
 riverctl rule-add -title chat_term dimensions 1800 990
-riverctl spawn "ghostty --title='chat_term' --gtk-tabs-location=hidden -e aichat"
+riverctl spawn "ghostty --title='chat_term' --window-decoration=auto --gtk-tabs-location=hidden -e aichat"
 riverctl map normal Mod1 Y spawn 'sh -c "riverctl toggle-focused-tags 256; riverctl focus-view next"'
 
 riverctl rule-add -title architect_term tags 512 # 1000000000
 riverctl rule-add -title architect_term float
 riverctl rule-add -title architect_term dimensions 1700 1100
-riverctl spawn "ghostty --title='architect_term' --gtk-tabs-location=hidden -e 'cd $(zoxide query --list | grep "/projects/" | head -n 1) && export OPENROUTER_API_KEY=$(cat /run/secrets/OPENROUTER_API_KEY) && nix develop nixpkgs#aider-chat'"
+riverctl spawn "ghostty --title='architect_term' --window-decoration=auto --gtk-tabs-location=hidden -e 'cd $(zoxide query --list | grep "/projects/" | head -n 1) && export AWS_ACCESS_KEY=$(cat /run/secrets/AWS_ACCESS_KEY) && export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/AWS_SECRET_ACCESS_KEY) && exec $SHELL -i'"
 riverctl map normal Mod1 U spawn 'sh -c "riverctl toggle-focused-tags 512; riverctl focus-view next"'
 
 riverctl rule-add -title news_term tags 1024 # 10000000000
 riverctl rule-add -title news_term float
 riverctl rule-add -title news_term dimensions 1700 1100
-riverctl spawn "ghostty --title='news_term' --gtk-tabs-location=hidden -e newsboat"
+riverctl spawn "ghostty --title='news_term' --window-decoration=auto --gtk-tabs-location=hidden -e newsboat"
 riverctl map normal Mod1 S spawn 'sh -c "riverctl toggle-focused-tags 1024; riverctl focus-view next"'
 
 riverctl rule-add -title docker_term tags 2048
 riverctl rule-add -title docker_term float
 riverctl rule-add -title docker_term dimensions 1700 1100
-riverctl spawn "ghostty --title='docker_term' --gtk-tabs-location=hidden -e lazydocker"
+riverctl spawn "ghostty --title='docker_term' --window-decoration=auto --gtk-tabs-location=hidden -e lazydocker"
 riverctl map normal Mod1 D spawn 'sh -c "riverctl toggle-focused-tags 2048; riverctl focus-view next"'
 
 riverctl rule-add -title kanji_practice_term tags 4096
 riverctl rule-add -title kanji_practice_term float
 riverctl rule-add -title kanji_practice_term dimensions 1850 1020
-riverctl spawn "ghostty --title='kanji_practice_term' --gtk-tabs-location=hidden --font-size=33 -e 'python3 ~/.config/nixos/dotfiles/kanji_practice/game.py'"
+riverctl spawn "ghostty --title='kanji_practice_term' --window-decoration=auto --gtk-tabs-location=hidden --font-size=33 -e 'python3 ~/.config/nixos/dotfiles/kanji_practice/game.py'"
 riverctl map normal Mod1 I spawn 'sh -c "riverctl toggle-focused-tags 4096; riverctl focus-view next"'
 

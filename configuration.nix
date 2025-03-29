@@ -24,12 +24,25 @@
     TERMINAL = "foot";
     SHELL = "fish";
     XDG_CURRENT_DESKTOP = "river";
+    XDG_SESSION_TYPE = "wayland";
     WAYLAND_DISPLAY = "wayland-1";
+    MOZ_ENABLE_WAYLAND = "1";
+    GTK_USE_PORTAL = "1";
+    NIXOS_XDG_OPEN_USE_PORTAL = "1";
+    NIXOS_OZONE_WL = "1";
+    # Python
+    PYTHONDONTWRITEBYTECODE = 1;
+    # Go
     GOROOT = "${pkgs.go}/share/go";
     GOPATH = "$HOME/go";
-    PATH = "$PATH:$GOROOT/bin:$GOPATH/bin";
-    PYTHONDONTWRITEBYTECODE = 1;
+    PATH = [
+      "$HOME/go//bin"
+      "${pkgs.go}/share/go"
+    ];
+    # Claude-code
     CLAUDE_CODE_USE_BEDROCK = 1;
+    AWS_REGION = "us-east-1";
+    ANTHROPIC_MODEL = "us.anthropic.claude-3-7-sonnet-20250219-v1:0";
   };
   ## PROGRAM CONFIGURATION
   # Most programs I configure through regular dotfiles using GNU Stow, without reliance on nix.
@@ -49,14 +62,11 @@
 
   ## PROGRAM INSTALLATION
   config.environment.systemPackages = with pkgs; [
-    # Installer
-    nixos-generators
     # Backups
     restic
     # Api key management
     sops # + sops-nix downloaded through flakes
     age
-    gitleaks
     ripsecrets
     # Password manager
     keepassxc
@@ -99,6 +109,7 @@
     bash
     gum
     zoxide
+    ripgrep
     fzf
     fd
     # File manager
@@ -165,11 +176,10 @@
     ffmpeg
     # Base linux stuff
     coreutils
-
-    # # Steam
-    # steam
-    # protonplus
-
+    # Steam
+    steam
+    protonplus
+    gamemode
     # Languages
     # grpc-tools
     ## Markdown
@@ -241,8 +251,5 @@
     # ## C-Sharp
     # omnisharp-roslyn
     # netcoredbg
-    steam
-    protonplus
-    gamemode
   ];
 }

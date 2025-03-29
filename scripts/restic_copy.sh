@@ -49,6 +49,7 @@ if [ ! -d "$TARGET_REPO" ]; then
     echo "Creating repository directory on target drive..." | gum style --foreground 6
     mkdir -p "$TARGET_REPO"
 fi
+# Might need: sudo chown -R $USER:users /run/media/nixos/USB
 
 # Confirm the operation
 echo "Source: $SOURCE_REPO" | gum style --foreground 6

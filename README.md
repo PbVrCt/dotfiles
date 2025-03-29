@@ -58,8 +58,9 @@ Then do:
 2. Burn it into an usb.
 3. Install into a new machine.
 At boot choose the UEFI option if available. During the wizard choose GNOME. At the partitioning section choose 'Erase all'.
-4. Clone the repo into ~/.config/nixos. 
-4a. Alternatively, from my backup, mounted from another usb:
+4. Clone this repo into ~/.config/nixos. 
+
+4a. Copy it from my backup, mounted from another usb:
 ```bash
 nix-shell -p restic
 restic restore latest -r "/run/media/$USERNAME/$USB/restic-repo" --target "/home/$USERNAME/restore/"
@@ -84,8 +85,17 @@ nix-shell -p stow
 nix-shell -p git
 sudo nixos-rebuild switch --flake "$HOME/.config/nixos#$ENTRY"
 ```
-Takes a while, downloads ~15GB. At the end, if kanata gives a permission error, Ignore it.
+Takes a while, downloads ~15GB. At the end, if kanata gives a permission error, ignore it.
+
 8. Run: `reboot`
 
 # To do:
-- [Consider remote development](https://www.youtube.com/watch?v=KQ2gz5i7VAA). Look into: vps providers, tailscale, nixos-anywhere.
+
+- Ask LLMs questions through voice. Look into:
+  https://github.com/oddlama/whisper-overlay
+  https://github.com/KoljaB/RealtimeSTT
+
+- [Consider remote development](https://www.youtube.com/watch?v=KQ2gz5i7VAA). Look into:
+  vps providers
+  tailscale
+  nixos-anywhere

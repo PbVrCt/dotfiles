@@ -16,7 +16,7 @@
           ./base.nix
           inputs.sops-nix.nixosModules.sops
           ./hardware/thinkpad/hardware-configuration.nix
-          ./hardware/modules/intel_hardware_decoding.nix
+          ./hardware/intel.nix
         ];
       };
       lifebook = inputs.nixpkgs.lib.nixosSystem {
@@ -26,7 +26,7 @@
           ./base.nix
           inputs.sops-nix.nixosModules.sops
           ./hardware/lifebook/hardware-configuration.nix
-          ./hardware/modules/intel_hardware_decoding.nix
+          ./hardware/intel.nix
         ];
       };
       pc = inputs.nixpkgs.lib.nixosSystem {
@@ -36,8 +36,8 @@
           ./base.nix
           inputs.sops-nix.nixosModules.sops
           ./hardware/pc/hardware-configuration.nix
-          # ./hardware/modules/amd.nix
           ./hardware/nvidia.nix
+          ./hardware/amd.nix
         ];
       };
     };

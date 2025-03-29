@@ -2,8 +2,11 @@ keybind = shift+up=scroll_page_fractional:-0.1
 keybind = shift+down=scroll_page_fractional:0.1
 keybind = ctrl+shift+r=reload_config
 
-background-opacity = 0.87
-# window-decoration = none # Not available yet
+cursor-color=ff00ff
+shell-integration=fish
+shell-integration-features=true
+background-opacity=0.87
+window-decoration=none
 
 # # Empty values are used to reset config keys to default.
 # key =

@@ -27,7 +27,7 @@ def parse_kanji_file(filepath):
     return kanji_list
 
 
-def create_kanji_sections(kanji_list, group_size=100):
+def create_kanji_sections(kanji_list, group_size=50):
     return [
         kanji_list[i : i + group_size] for i in range(0, len(kanji_list), group_size)
     ]
@@ -106,7 +106,7 @@ def study_kanji(kanji_list, section, total_sections):
 
 def main():
     while True:
-        filename = "/home/mainuser/.config/nixos/dotfiles/kanji_practice/kanjis.txt"
+        filename = "/home/nixos/.config/nixos/dotfiles/kanji_practice/kanjis.txt"
         kanji_list = parse_kanji_file(filename)
         kanji_sections = create_kanji_sections(kanji_list)
         print("Welcome to the Japanese Kanji Study Program!")
