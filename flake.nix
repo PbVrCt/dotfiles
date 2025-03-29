@@ -36,8 +36,8 @@
           ./base.nix
           inputs.sops-nix.nixosModules.sops
           ./hardware/pc/hardware-configuration.nix
-          ./hardware/modules/nvidia.nix
           # ./hardware/modules/amd.nix
+          ./hardware/nvidia.nix
         ];
       };
     };
