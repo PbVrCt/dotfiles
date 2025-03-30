@@ -3,13 +3,6 @@
 ;; Two japanese keyboards
 ;; A spanish keyboard
 ;; A corne keyboard
-
-(defcfg
-  process-unmapped-keys yes ;; unspecified keys
-  movemouse-smooth-diagonals yes 
-  movemouse-inherit-accel-state yes
-)
-
 (defalias
   wsp (multi
         lmet

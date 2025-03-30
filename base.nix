@@ -87,6 +87,7 @@
     hostName = "nixos";
     wireless.enable = false;
     networkmanager.enable = true;
+    firewall.enable = true;
   };
 
   # No password

@@ -157,7 +157,6 @@
     powertop
     # Device monitoring
     bottom
-    bandwhich
     macchina
     dust
     # Audio

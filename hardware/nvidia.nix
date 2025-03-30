@@ -11,6 +11,7 @@
     # package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
   # hardware.nvidia-container-toolkit.enable = true;
+  nixpkgs.config.cudaSupport = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     cudaPackages.cudatoolkit

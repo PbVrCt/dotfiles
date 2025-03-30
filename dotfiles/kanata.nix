@@ -10,7 +10,12 @@
     enable = true;
     keyboards.default = {
       devices = [];
-      configFile = builtins.toPath ./kanata/kanata.kbd;
+      config = builtins.readFile ./kanata/kanata.kbd;
+      extraDefCfg = "
+        process-unmapped-keys yes ;; unspecified keys
+        movemouse-smooth-diagonals yes
+        movemouse-inherit-accel-state yes
+      ";
     };
   };
 }
