@@ -15,13 +15,13 @@
         lmet
       (layer-while-held workspaces))
   ext (layer-while-held extra)
-  a   (switch 
-        ((key-timing 3 less-than 500)) a break
-        () (tap-hold-release 0 200 a rsft) break
-      )
   ;   (switch 
         ((key-timing 3 less-than 200)) ; break
         () (tap-hold-release 0 200 ; (layer-while-held extra)) break
+      )
+  p   (switch 
+        ((key-timing 3 less-than 200)) p break
+        () (tap-hold-release 0 200 p (layer-while-held mouse)) break
       )
 )
 (defsrc
@@ -31,8 +31,8 @@
        lmet                               kana ralt rmet    
 )
 (deflayer base
-  _    _    _    _    _    _    _    _    _    _    _    bspc
-  esc  @a   _    _    _    _    _    _    _    _    @;   ret 
+  _    _    _    _    _    _    _    _    _    _    @p   bspc
+  esc  _    _    _    _    _    _    _    _    _    @;   ret 
   _    _    _    _    _    _    _    _          
        @wsp                               rctl rctl @ext          
 )
@@ -42,15 +42,21 @@
   _    _    _    _    _    _    _    _          
        _                                  _    _    _        
 )
+(deflayer extra
+  0    1    2    3    4    5    6    7    8    9    0    _
+  _    rsft '    -    =    mlft left down up   rght _    '
+  _    `    [    ]    /    \    S-9  S-0        
+       _                                  _    _    _        
+)
 (defalias
   ml   (movemouse-accel-left 10 150 5 14)
   mu   (movemouse-accel-up  10 150 5 10)
   md   (movemouse-accel-down 10 150 5 10)
   mr   (movemouse-accel-right 10 150 5 14)
 )
-(deflayer extra
-  1    2    3    @mu  4    5    6    7    8    9    0    [
-  '    _    @ml  @md  @mr  mlft left down up   rght _    '
-  _    \    `    -    /    =    [    ]          
+(deflayer mouse
+  _    _    _    @mu  _    _    _    _    _    _    _    _
+  _    mrgt @ml  @md  @mr  mlft _    _    _    _    _    _   
+  _    _    _    _    _    _    _    _          
        _                                  _    _    _        
 )
