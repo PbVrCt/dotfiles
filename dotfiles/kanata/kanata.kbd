@@ -3,6 +3,7 @@
 ;; Two japanese keyboards
 ;; A spanish keyboard
 ;; A corne keyboard
+
 (defalias
   wsp (multi
         lmet
@@ -17,6 +18,7 @@
         () (tap-hold-release 0 200 p (layer-while-held mouse)) break
       )
 )
+
 (defsrc
   tab  q    w    e    r    t    y    u    i    o    p    [
   caps a    s    d    f    g    h    j    k    l    ;    '
@@ -37,19 +39,32 @@
 )
 (deflayer extra
   0    1    2    3    4    5    6    7    8    9    0    _
-  _    rsft '    -    =    mlft left down up   rght _    '
-  _    `    [    ]    /    \    S-9  S-0        
+  _    rsft -    =    /    '    left down up   rght _    '
+  _    _    \    `    [    ]    S-9  S-0        
        _                                  _    _    _        
 )
+
 (defalias
+  o    (layer-while-held mouseslow)
   ml   (movemouse-accel-left 10 150 5 14)
   mu   (movemouse-accel-up  10 150 5 10)
   md   (movemouse-accel-down 10 150 5 10)
   mr   (movemouse-accel-right 10 150 5 14)
+  mls  (movemouse-accel-left 10 150 2 5)
+  mus  (movemouse-accel-up  10 150 2 3)
+  mds  (movemouse-accel-down 10 150 2 3)
+  mrs  (movemouse-accel-right 10 150 2 5)
 )
+
 (deflayer mouse
-  _    _    _    @mu  _    _    _    _    _    _    _    _
+  _    _    _    @mu  _    _    _    _    _   @o    _    _
   _    mrgt @ml  @md  @mr  mlft _    _    _    _    _    _   
+  _    _    _    _    _    _    _    _          
+       _                                  _    _    _        
+)
+(deflayer mouseslow
+  _    _    _    @mus _    _    _    _    _    _    _    _
+  _    mrgt @mls @mds @mrs mlft _    _    _    _    _    _   
   _    _    _    _    _    _    _    _          
        _                                  _    _    _        
 )
