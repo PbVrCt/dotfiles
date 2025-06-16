@@ -20,22 +20,24 @@
 | Function             | Program                  |
 |----------------------|--------------------------|
 | IDE                  | Helix                    |
-| AI                   | Aichat, Claude-code      |
+| AI                   | Aichat, Opencode         |
+|                      | Gemini deep research     |
 | Compositor           | River                    |
 | Keyboard remapper    | Kanata                   |
 | Terminal emulator    | Foot, Ghostty            |
 | Terminal multiplexer | Tmux                     |
-| File manager         | Yazi+Bashmount           |
+| File manager         | Yazi + Bashmount         |
 | Backups              | Restic                   |
 | Secrets              | Sops-nix                 |
+| News aggregator      | Newsboat + Nitter        |
 
 
-# Goals, in order:
+# Goals, by priority:
 
 1. Simple: Minimize cognitive load, minimize configuration.
 2. Effective: Get close to the best developer experience available.
 3. Reliable: Favor well stablished technologies, favor software with less dependencies, favor lightweight, favor UNIX philosophy.
-4. Reproducible: Be able to set up the work environment in a new machine quickly.
+4. Reproducible: Be able to set up the environment quickly.
 5. Minimize maintenance: Do the configuration effort upfront.
 
 
@@ -52,12 +54,16 @@ Then do:
 
 ```cat /run/secrets/$SECRET```
 
-# Installation
+# Setup
 
 1. Download the [official recommended graphical iso image](https://nixos.org/download/).
 2. Burn it into an usb.
 3. Install into a new machine.
-At boot choose the UEFI option if available. During the wizard choose GNOME. At the partitioning section choose 'Erase all'.
+At boot choose the UEFI option if available.
+During the wizard:
+  For desktoop environment choose GNOME.
+  For username, name use 'nixos'.
+  At the partitioning section choose 'Erase all'.
 4. Clone this repo into ~/.config/nixos. 
 
 4a. Copy it from my backup, mounted from another usb:
@@ -80,16 +86,22 @@ To do so copy the `hardware-configuration.nix` that has been generated at `/etc/
 nix-shell -p stow
 ~/.config/nixos/scripts/stow_restow.sh
 ```
-7. Run:
+7. Take the entry value from step 5. and run:
 ```bash
 nix-shell -p git
 sudo nixos-rebuild switch --flake "$HOME/.config/nixos#$ENTRY"
 ```
-Takes a while, downloads ~15GB. At the end, if kanata gives a permission error, ignore it.
+
+For example:
+```bash
+sudo nixos-rebuild switch --flake "$HOME/.config/nixos#thinkpad"
+```
+
+It will download the programs (~15GB), it takes a while.
 
 8. Run: `reboot`
 
-# To do:
+# TODO:
 
 - Ask LLMs questions through voice. Look into:
   https://github.com/oddlama/whisper-overlay

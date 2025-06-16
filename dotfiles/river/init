@@ -43,25 +43,25 @@ riverctl set-focused-tags 1
 riverctl rule-add -title wifi_term tags 32 # 0000100000
 riverctl rule-add -title wifi_term float
 riverctl rule-add -title wifi_term dimensions 700 700
-riverctl spawn "ghostty --title=wifi_term --gtk-tabs-location=hidden -e nmtui-connect"
+riverctl spawn "ghostty --title=wifi_term --gtk-tabs-location=hidden -e 'nmtui-connect; exec bash'"
 riverctl map normal Mod1 Q spawn 'sh -c "riverctl toggle-focused-tags 32; riverctl focus-view next"'
 
 riverctl rule-add -title audio_term tags 64 # 0001000000
 riverctl rule-add -title audio_term float
 riverctl rule-add -title audio_term dimensions 700 500
-riverctl spawn "ghostty --title=audio_term --gtk-tabs-location=hidden -e pulsemixer"
+riverctl spawn "ghostty --title=audio_term --gtk-tabs-location=hidden -e 'pulsemixer; exec bash'"
 riverctl map normal Mod1 R spawn 'sh -c "riverctl toggle-focused-tags 64; riverctl focus-view next"'
 
 riverctl rule-add -title brightness_term tags 128 # 0010000000
 riverctl rule-add -title brightness_term float
 riverctl rule-add -title brightness_term dimensions 700 200
-riverctl spawn "ghostty --title=brightness_term --gtk-tabs-location=hidden -e ~/.config/nixos/scripts/brightness.sh"
+riverctl spawn "ghostty --title=brightness_term --gtk-tabs-location=hidden -e '~/.config/nixos/scripts/brightnessctl.sh; exec bash'"
 riverctl map normal Mod1 E spawn 'sh -c "riverctl toggle-focused-tags 128; riverctl focus-view next"'
 
 riverctl rule-add -title chat_term tags 256 # 0100000000
 riverctl rule-add -title chat_term float
 riverctl rule-add -title chat_term dimensions 1850 1020
-riverctl spawn "ghostty --title='chat_term' --window-decoration=auto --gtk-tabs-location=hidden -e aichat"
+riverctl spawn "ghostty --title='chat_term' --window-decoration=auto --gtk-tabs-location=hidden -e 'aichat; exec bash'"
 riverctl map normal Mod1 Y spawn 'sh -c "riverctl toggle-focused-tags 256; riverctl focus-view next"'
 
 riverctl rule-add -title architect_term tags 512 # 1000000000
@@ -73,18 +73,12 @@ riverctl map normal Mod1 U spawn 'sh -c "riverctl toggle-focused-tags 512; river
 riverctl rule-add -title news_term tags 1024 # 10000000000
 riverctl rule-add -title news_term float
 riverctl rule-add -title news_term dimensions 1820 1100
-riverctl spawn "ghostty --title='news_term' --window-decoration=auto --gtk-tabs-location=hidden -e newsboat"
+riverctl spawn "ghostty --title='news_term' --window-decoration=auto --gtk-tabs-location=hidden -e 'newsboat; exec bash'"
 riverctl map normal Mod1 S spawn 'sh -c "riverctl toggle-focused-tags 1024; riverctl focus-view next"'
 
-riverctl rule-add -title docker_term tags 2048
-riverctl rule-add -title docker_term float
-riverctl rule-add -title docker_term dimensions 1820 1100
-riverctl spawn "ghostty --title='docker_term' --window-decoration=auto --gtk-tabs-location=hidden -e lazydocker"
-riverctl map normal Mod1 D spawn 'sh -c "riverctl toggle-focused-tags 2048; riverctl focus-view next"'
-
-riverctl rule-add -title kanji_practice_term tags 4096
+riverctl rule-add -title kanji_practice_term tags 2048
 riverctl rule-add -title kanji_practice_term float
 riverctl rule-add -title kanji_practice_term dimensions 1850 1020
 riverctl spawn "ghostty --title='kanji_practice_term' --window-decoration=auto --gtk-tabs-location=hidden --font-size=33 -e 'python3 ~/.config/nixos/dotfiles/kanji_practice/game.py'"
-riverctl map normal Mod1 I spawn 'sh -c "riverctl toggle-focused-tags 4096; riverctl focus-view next"'
+riverctl map normal Mod1 I spawn 'sh -c "riverctl toggle-focused-tags 2048; riverctl focus-view next"'
 

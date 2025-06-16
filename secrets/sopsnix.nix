@@ -14,6 +14,9 @@ in {
       OPENROUTER_API_KEY = {owner = user;};
       AWS_ACCESS_KEY = {owner = user;};
       AWS_SECRET_ACCESS_KEY = {owner = user;};
+      TWITTER_PASSWORD = {owner = user;};
+      TWITTER_CODE = {owner = user;};
+      TWITTER_SESSION = {owner = user;};
       "git/USER_NAME" = {owner = user;};
       "git/USER_EMAIL" = {owner = user;};
     };

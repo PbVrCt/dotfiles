@@ -4,11 +4,12 @@
 ;; A spanish keyboard
 ;; A corne keyboard
 
+;; TODO: Finish stormgate keybindings. I haven't even started playing the game.
+
 (defalias
   wsp (multi
         lmet
       (layer-while-held workspaces))
-  ext (layer-while-held extra)
   ;   (switch 
         ((key-timing 3 less-than 200)) ; break
         () (tap-hold-release 0 200 ; (layer-while-held extra)) break
@@ -17,31 +18,43 @@
         ((key-timing 3 less-than 200)) p break
         () (tap-hold-release 0 200 p (layer-while-held mouse)) break
       )
+  sg  (layer-switch stormgate)
+  bs  (layer-switch base)
+  sg2 (layer-while-held stormgate2)
+  sg3 (multi
+		lctl
+	  (layer-while-held stormgate2))
+  sg4 (multi
+		lsft
+	  (layer-while-held stormgate2))
+  sg5 (multi
+		lalt
+	  (layer-while-held stormgate2))
 )
 
 (defsrc
   tab  q    w    e    r    t    y    u    i    o    p    [
   caps a    s    d    f    g    h    j    k    l    ;    '
   lsft z    x    c    v    b    n    m          
-       lmet                               kana ralt rmet    
+  lctl lmet lalt                          kana ralt rmet    
 )
 (deflayer base
   _    _    _    _    _    _    _    _    _    _    @p   bspc
   esc  _    _    _    _    _    _    _    _    _    @;   ret 
   _    _    _    _    _    _    _    _          
-       @wsp                               rctl rctl @ext          
+  _    @wsp _                             rctl rctl @sg           
 )
 (deflayer workspaces
   _    _    _    _    _    _    _    _    _    _    _    _
   _    1    2    3    4    5    _    _    _    _    _    _
   _    _    _    _    _    _    _    _          
-       _                                  _    _    _        
+  _    _    _                             _    _    _        
 )
 (deflayer extra
   0    1    2    3    4    5    6    7    8    9    0    _
   _    rsft -    =    /    '    left down up   rght _    '
   _    _    \    `    [    ]    S-9  S-0        
-       _                                  _    _    _        
+  _    _    _                             _    _    _        
 )
 
 (defalias
@@ -60,11 +73,23 @@
   _    _    _    @mu  _    _    _    _    _   @o    _    _
   _    mrgt @ml  @md  @mr  mlft _    _    _    _    _    _   
   _    _    _    _    _    _    _    _          
-       _                                  _    _    _        
+  _    _    _                             _    _    _        
 )
 (deflayer mouseslow
   _    _    _    @mus _    _    _    _    _    _    _    _
   _    mrgt @mls @mds @mrs mlft _    _    _    _    _    _   
   _    _    _    _    _    _    _    _          
-       _                                  _    _    _        
+  _    _    _                             _    _    _        
+)
+(deflayer stormgate
+  _    q    w    e    r    t    _    _    _    _    _    _
+  @sg5 a    s    d    f    g    _    _    _    _    _    _
+  @sg4 _    _    _    _    _    _    _          
+  _    @sg3 @sg2                          _    _    @bs      
+)
+(deflayer stormgate2
+  i    6    7    8    9    0    _    _    _    _    _    _
+  _    1    2    3    4    5    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _          
+  _    lctl _                             _    _    _        
 )

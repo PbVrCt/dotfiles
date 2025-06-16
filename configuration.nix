@@ -56,6 +56,7 @@
     ./dotfiles/fish.nix
     ./dotfiles/tmux.nix
     ./dotfiles/gdm.nix
+    ./dotfiles/nitter.nix
     ./dotfiles/steam.nix
     ./secrets/sopsnix.nix
   ];
@@ -70,6 +71,8 @@
     ripsecrets
     # Password manager
     keepassxc
+    # 2FA alternative
+    totp-cli
     # Dotfiles symlinking
     stow
     # Keyboard remapper
@@ -92,12 +95,14 @@
     lazygit
     serpl
     # AI assistant
+    repomix
     claude-code
     aichat
     ## aider-chat as nix-shell
     playwright # for aider-chat
-    # Aws
+    # Cloud
     awscli2
+    flyctl
     # App launcher
     fuzzel
     # Terminal
@@ -122,6 +127,7 @@
     brave
     # RSS
     newsboat
+    nitter
     # Pdfs
     sioyek
     # Western fonts
@@ -139,7 +145,8 @@
     git-lfs
     gh
     gh-dash
-    # jujutsu
+    jujutsu
+    lazyjj
     # Docker
     docker
     # docker-compose
@@ -148,6 +155,7 @@
     # sqlite
     # Miscelanious
     nix-search-cli
+    libreoffice
     tree
     tokei
     upiano
@@ -192,7 +200,7 @@
     ## Python
     python312Full
     ruff
-    ruff-lsp
+    # ruff-lsp
     python312Packages.python-lsp-server
     python312Packages.python-lsp-ruff
     pyright
@@ -212,6 +220,7 @@
     portaudio
     gopls
     golangci-lint
+    protobuf
     protoc-gen-go
     protoc-gen-go-grpc
     delve

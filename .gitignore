@@ -1,5 +1,3 @@
-.aider.chat*
-.aider.input*
-.aider.tags*
-urls*
 **/aichat/config.yaml
+**/nitter/.venv
+**/nitter/sessions.jsonl
