@@ -15,7 +15,10 @@ ShellRoot {
     property string currentDate: ""
     property int batteryPct: -1
     property int cpuPct: -1
+    property bool makoHidden: false
     property color defaultColor: "#a8a8a8"
+    property color warningColor: "#ffaa00"
+    property color criticalColor: "#ff4444"
     property string defaultFont: "monospace"
     
     Timer {
@@ -30,6 +33,7 @@ ShellRoot {
                 batteryPct = Math.round(UPower.displayDevice.percentage * 100)
             }
             cpuProcess.running = true
+            makoProcess.running = true
         }
     }
     
@@ -41,6 +45,18 @@ ShellRoot {
             onRead: data => {
                 var usage = parseInt(data.trim())
                 if (!isNaN(usage)) cpuPct = usage
+            }
+        }
+    }
+
+    Process {
+        id: makoProcess
+        command: ["makoctl", "mode"]
+        running: false
+        stdout: SplitParser {
+            onRead: data => {
+                var mode = data.trim()
+                makoHidden = (mode === "hidden")
             }
         }
     }
@@ -57,6 +73,15 @@ ShellRoot {
         RowLayout {
             id: content
             spacing: 12
+            Column {
+                visible: makoHidden
+                Text {
+                    text: "H"
+                    color: warningColor
+                    font { pointSize: 12; family: defaultFont }
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+            }
             Column {
                 Text {
                     text: currentTime
@@ -81,8 +106,8 @@ ShellRoot {
                 Text {
                     text: cpuPct >= 0 ? cpuPct : "--"
                     color: cpuPct < 0 ? defaultColor :
-                           cpuPct > 70 ? "#ff4444" :
-                           cpuPct > 20 ? "#ffaa00" : defaultColor
+                           cpuPct > 70 ? criticalColor :
+                           cpuPct > 20 ? warningColor : defaultColor
                     font { pointSize: 11; family: defaultFont }
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
@@ -96,9 +121,9 @@ ShellRoot {
                 }
                 Text {
                     text: batteryPct >= 0 ? batteryPct : "--"
-                    color: batteryPct < 0 ? defaultColor : 
-                           batteryPct < 20 ? "#ff4444" :
-                           batteryPct < 50 ? "#ffaa00" : defaultColor
+                    color: batteryPct < 0 ? defaultColor :
+                           batteryPct < 20 ? criticalColor :
+                           batteryPct < 50 ? warningColor : defaultColor
                     font { pointSize: 11; family: defaultFont }
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
@@ -114,5 +139,6 @@ ShellRoot {
             batteryPct = Math.round(UPower.displayDevice.percentage * 100)
         }
         cpuProcess.running = true
+        makoProcess.running = true
     }
 }

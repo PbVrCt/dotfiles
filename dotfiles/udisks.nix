@@ -10,6 +10,7 @@
     script = builtins.readFile ../scripts_as_dotfiles/udisks/automount.sh;
     environment = {
       AUTOMOUNTABLE_SERIALS_FILE = config.sops.secrets."USUAL_USBS_SERIALS".path;
+      USER_UID = toString config.users.users.${config.userDefinedGlobalVariables.username}.uid;
     };
     path = with pkgs; [
       bash

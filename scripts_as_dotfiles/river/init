@@ -36,7 +36,9 @@ riverctl spawn-tagmask 00000000000000000000000111111111
 # Misc shortcuts
 
 riverctl map normal Super p spawn "fuzzel &" # App launcher
-riverctl map normal Mod1 i spawn "$HOME/.config/nixos/scripts_as_dotfiles/mako/dismiss_oldest_notification.sh"
+riverctl map normal Mod1 c spawn "grim - | wl-copy" # Screenshot clipboard
+riverctl map normal Mod1 d spawn "$HOME/.config/nixos/scripts_as_dotfiles/mako/dismiss_oldest_notification.sh"
+riverctl map normal Mod1 i spawn "makoctl mode -t hidden"
 
 # Initial apps (Equivalent of workspaces 1,2,3 in i3/Sway)
 

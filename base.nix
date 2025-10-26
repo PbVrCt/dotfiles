@@ -8,7 +8,7 @@
 
   # Networking
   config.networking = {
-    hostName = "nixos";
+    hostName = "thinkpad";
     wireless.enable = false;
     networkmanager.enable = true;
     firewall.enable = true;

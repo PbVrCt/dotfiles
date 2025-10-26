@@ -1,7 +1,6 @@
-# Table of Contents
+<img src="./assets/filler.gif" alt="Workspaces scratchpads" width="700">
 
 - [Goals](#goals)
-- [Gallery](#gallery)
 - [Setup](#setup)
   - [Requirements](#requirements)
   - [Instructions](#instructions)
@@ -29,26 +28,6 @@
 - **Reliable**: Favor well stablished technologies, favor software with less dependencies, favor lightweight, favor UNIX philosophy.
 - **Reproducible**: Be able to set up the environment quickly.
 - **Low maintance**: Do the configuration effort upfront.
-
-# Gallery
-
-<table align="center" style="border: none; background-color: transparent;">
-<tr>
-  <td><img src="./assets/filler.gif" alt="Workspaces scratchpads" width="700"></td>
-  <td><img src="./assets/filler.gif" alt="Keybord driven. See keybind helper" width="700"></td>
-</tr>
-<tr>
-  <td><img src="./assets/filler.gif" alt="ClaudeCode" width="700"></td>
-  <td><img src="./assets/filler.gif" alt="Helix, lazygit" width="700"></td>
-</tr>
-<tr>
-  <td><img src="./assets/filler.gif" alt="Newsboat" width="700"></td>
-  <td><img src="./assets/filler.gif" alt="Tmux commands" width="700"></td>
-</tr>
-<tr>
-  <td colspan="2" align="center"><img src="./assets/filler.gif" alt="Switching languages" width="700"></td>
-</tr>
-</table>
 
 # Setup
 
@@ -92,8 +71,8 @@ nmtui # Activate a connection -> Select the network -> Enter the password
 Option A)  If it is the first time, clone this repo into `~/.config/nixos`:
 
 ```bash
-nix-shell -p git
-git clone "https://github.com/PbVrCt/dotfiles" "$HOME/.config/nixos"
+export NIX_CONFIG="experimental-features = nix-command flakes"
+nix run nixpkgs#git -- clone "https://github.com/PbVrCt/dotfiles" "$HOME/.config/nixos"
 ```
 
 Option B) If you have a backup from a previous setup, then restore it.
@@ -101,28 +80,24 @@ Option B) If you have a backup from a previous setup, then restore it.
 Plug the usb into the laptop and mount it:
 
 ```bash
-nix-shell -p bashmount
-bashmount # mount to for example /home/nixos/mnt/usb
+export NIX_CONFIG="experimental-features = nix-command flakes"
+nix run nixpkgs#bashmount # mount to /home/nixos/mnt/usb
 ```
     
 Restore the backup:
 ```bash
-nix-shell -p restic
-sudo -i
 REPO=/home/nixos/mnt/usb/restic-repo 
 RESTORE_PATH="$HOME/restic-restored/"
-sudo restic restore latest -r "$REPO" --target "$RESTORE_PATH"
-sudo chown -R $USER:$USER "$RESTORE_PATH"
+nix run nixpkgs#restic -- restore latest -r "$REPO" --target "$RESTORE_PATH"
 # config
 mkdir /home/nixos/.config
-cp /home/nixos/restic-restored/home/nixos/.config/nixos /home/nixos/.config/nixos -r
+cp $RESTORE_PATH/home/nixos/.config/nixos /home/nixos/.config/nixos -r
 # other stuff: projects, notes, secrets key, the backup itself
-cp /home/nixos/restic-restored/home/nixos/projects /home/nixos/projects -r
-cp /home/nixos/restic-restored/home/nixos/notes /home/nixos/notes -r
-cp /home/nixos/restic-restored/home/nixos/.config/sops_private_key.txt /home/nixos/.config/sops_private_key.txt
+cp $RESTORE_PATH/home/nixos/projects /home/nixos/projects -r
+cp $RESTORE_PATH/home/nixos/notes /home/nixos/notes -r
+cp $RESTORE_PATH/home/nixos/.config/sops_private_key.txt /home/nixos/.config/sops_private_key.txt
 cp $REPO /home/nixos/restic-repo -r
-rm /home/nixos/restic-restored/ -r
-sudo chown -R nixos: /home/nixos/.config/nixos/
+sudo rm $RESTORE_PATH -r
 ```
 6. Make scripts executable:
 ```bash
@@ -133,6 +108,7 @@ chmod +x /home/nixos/.config/nixos/scripts_as_dotfiles/**
 ```bash
 nix-shell -p stow
 /home/nixos/.config/nixos/scripts/stow.sh
+exit
 ```
 
 8. Add a new host at `host/$HOST/` following the existing examples.
@@ -153,8 +129,7 @@ sudo cp /etc/nixos/hardware-configuration.nix /home/nixos/.config/nixos/hosts/$H
 
 10. Reference the host from the previous steps in `flake.nix`.
 ```bash
-nix-shell -p helix
-hx /home/nixos/.config/nixos/flake.nix
+nix run nixpkgs#helix /home/nixos/.config/nixos/flake.nix
 ```
 
 For example:
@@ -172,10 +147,19 @@ For example:
       };
 ```
 
-11. Change the timezone. In `base.nix`:
+11. Change the timezone and hostname. In `base.nix`:
+
 
 ```nix
-config.time.timeZone = "Asia/Tokyo";
+  config.time.timeZone = "Asia/Tokyo";
+
+  # Networking
+  config.networking = {
+    hostName = "vesuvio";
+```
+
+```bash
+nix run nixpkgs#helix /home/nixos/.config/nixos/base.nix
 ```
 
 
@@ -185,9 +169,9 @@ config.time.timeZone = "Asia/Tokyo";
 
 ```bash
 nix-shell -p git
+HOST=vesuvio # Have to set it again inside nix-shell
 sudo nixos-rebuild switch --flake "/home/nixos/.config/nixos#$HOST"
 ```
-> $HOST here is the name specified in the flake.nix entry in the previous step.
 
 13. Reboot:
 
@@ -270,7 +254,7 @@ Make sure your configuration, including `~/.config/nixos/secrets/sopsnix.nix`, o
 
 3. Rebuild:
 ```bash
-~/.config/nixos/scripts/nixos_rebuild.sh
+sudo nixos-rebuild switch --flake "/home/nixos/.config/nixos#$hostname"
 ```
 
 ## RSS feed
@@ -351,48 +335,50 @@ Update a dotfile::
 |:---|:---|
 | River | Log out (Super+Shift+E) and back in.  |
 |       | `riverctl COMMAND` (avoids logging out) |
-| Kanata | `~/.config/nixos/scripts/nixos_rebuild.sh` |
+| Kanata | `sudo nixos-rebuild switch --flake "/home/nixos/.config/nixos#$hostname"` |
 |        | `systemctl stop kanata-default; kanata -c ~/.config/nixos/dotfiles/kanata/kanata.kbd` |
 | Helix | `:config-reload` |
 | Ghostty | Press `ctrl`+`shift`+`,` (default for `reload_config`) |
+| Mako | `makoctl reload` |
 | Tmux | `tmux source ~/.tmux.conf` |
 | Fish | `source ~/.config/fish/config.fish` |
-| Aichat | Open a new instance |
 | Lazygit | Open a new instance |
 | Yazi | Open a new instance |
+| Aichat | Open a new instance |
+| Claude-code | Open a new instance |
 
 # Installing programs
 
 1. Specify the package in `config.environment.systemPackages`; See `configuration.nix`.
-2. Rebuild `~/.config/nixos/scripts/nixos_rebuild.sh`
+2. Rebuild `sudo nixos-rebuild switch --flake "/home/nixos/.config/nixos#$hostname"`
 
 # Updating packages broadly
 
 1. (Optional) Change `inputs.nixpkgs.url` in `flake.nix`
-1. Run `nix flake update`
-2. Rebuild `~/.config/nixos/scripts/nixos_rebuild.sh`
+2. Run `nix flake update` or `nix flake update nixkpgs`
+3. Rebuild `sudo nixos-rebuild switch --flake "/home/nixos/.config/nixos#$hostname"`
 
 # Upgrading/downgrading an specific package or pinning it to an specific version
 
-In the role of a software consumer, I avoid doing that.
-If a program doesn't work on my nixpkgs version, I usually pass on it until it does.
+Strictly as a software consumer, I avoid doing that.
+If a program doesn't work on my nixpkgs version, I pass on it until it does.
 
 [How to do it anyways](https://nixos-and-flakes.thiscute.world/nixos-with-flakes/downgrade-or-upgrade-packages)
 
 # Secrets
 
 I use `sops-nix` with secrets that I am comfortable exposing to anyone having access to my machine.
-`sops-nix` lets me hook up the secrets to my nixos config.
+`sops-nix` lets me access the secrets from my nixos config.
 The file containing the secrets is encrypted, so it can be commited with the rest of the configuration.
 
 - To edit/add a secret to the secrets file:
 1. Run sops `~/.config/nixos/scripts/sops.sh`. This unencrypts the file and opens it in $EDITOR, where you add/edit secrets.
 2. Save and exit; The file becomes encrypted again.
 
-- To access a secret from the nixos config, and expose it at `/run/secrets/$SECRET`:
+- To access a secret from the nixos config (and also expose it at `/run/secrets/$SECRET`, depending on who you set as the owner):
 1. Reference it in `~/.config/nixos/secrets/sopsnix.nix`
 2. Reference it wherever you want to use it in the config with `config.sops.secrets.SECRET.path`
-3. Rebuild `~/.config/nixos/scripts/nixos_rebuild.sh`
+3. Rebuild `sudo nixos-rebuild switch --flake "/home/nixos/.config/nixos#$hostname"`
 
 - To access a secret from the shell prompt, or a script: 
 ```bash
@@ -400,7 +386,7 @@ cat /run/secrets/$SECRET
 ```
 > WARNING:
 - It might be better to have the secrets referencej in `sopsnix.nix` be owned by systemd services and not the user.
-- Access through It might be problematic if a program keeps a history of the outputs of shell commands.
+- Access through /run/secrets/$SECRET might be problematic if a program keeps a history of the outputs of shell commands.
 - I might remove the access through /run/secrets/$SECRET.
 
 > Aside from sops/sopsnix, I use a password manager.
@@ -410,14 +396,15 @@ cat /run/secrets/$SECRET
 I made scripts for my usual backup sceneraios. They are just thin wrappers around the `restic` CLI:
 
 - `~/.config/nixos/scripts/restic_backup.sh`: Do a backup.
-- `~/.config/nixos/scripts/restic_copy.sh`: Copy backup to an usb.
-- `~/.config/nixos/scripts/restic__backup_and_copy.sh`: Calls the above two sequentially. What I typically run.
+- `~/.config/nixos/scripts/restic_copy.sh`: Copy the backup to drives.
+- `~/.config/nixos/scripts/restic__backup_and_copy.sh`: Call the above two sequentially.
 
 # Todos
 
-- Improve convenience: Set the development environment remotely.
+- Convenience: Set the development environment remotely.
   Use `tailscale`+`rustdesk` or if `rustdesk` results problematic in Wayland then consider `Wayvnc`.
-- Improve security: Acquire a better understanding of how security works on linux, of networking and of tailscale.
+- Security: Disk encryption.
+- Security: Acquire a better understanding of how security works on linux, of networking and of tailscale.
 
 <details>
 <summary><strong>For reference, things I tried before this:</strong></summary>

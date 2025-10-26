@@ -21,10 +21,15 @@ mount() {
 
     local serial=$(echo "$props" | grep -oP '(?<=^ID_SERIAL_SHORT=).*')
     local devname=$(echo "$props" | grep -oP '(?<=^DEVNAME=).*')
+
+    local mount_opts="nodev,nosuid,noexec"
+    if [[ "$fs_type" =~ ^(vfat|exfat|ntfs)$ ]]; then
+        mount_opts="${mount_opts},uid=${USER_UID}"
+    fi
     for automountable_serial in "${AUTOMOUNTABLE_SERIALS[@]}"; do
         if [ "$serial" = "$automountable_serial" ]; then
-            if udisksctl mount --block-device "$devname" --no-user-interaction --options nodev,nosuid,noexec; then
-                notify-send -c minimal-important "" "Recognized device. Mounted"
+            if udisksctl mount --block-device "$devname" --no-user-interaction --options "$mount_opts"; then
+                notify-send -c minimal "" "Recognized device. Mounted"
             fi
             break
         fi

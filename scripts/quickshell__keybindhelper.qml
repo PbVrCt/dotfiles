@@ -1,15 +1,15 @@
 #!/usr/bin/env -S quickshell -p
 
+// Displays a legend.
+
+// Requires:
+//   quickshell
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
-
-// Displays a legend.
-
-// Requires:
-//   quickshell
 
 ShellRoot {
     id: root
@@ -40,8 +40,10 @@ ShellRoot {
                 { "key": "Super+1-9", "description": "Switch to workspace" },
                 { "key": "Alt+h", "description": "Toggle aichat" },
                 { "key": "Alt+u", "description": "Toggle claude code (Run 'claude')" },
-                { "key": "Alt+i", "description": "Dismiss mako notification" },
-                { "key": "Alt+s", "description": "Toggle newsraft" },
+                { "key": "Alt+d", "description": "Dismiss notification (mako)" },
+                { "key": "Alt+i", "description": "Toggle notifications" },
+                { "key": "Alt+c", "description": "Screenshot to clipboard" },
+                { "key": "Alt+s", "description": "Toggle RSS (newsraft)" },
                 { "key": "Super+q", "description": "Toggle nmtui (wifi)" },
                 { "key": "Super+w", "description": "Toggle pulsemixer (audio)" },
                 { "key": "Super+e", "description": "Toggle brightnessctl" },
@@ -71,6 +73,7 @@ ShellRoot {
                 { "key": "Alt+g", "description": "Toggle lazygit in session dir" },
                 { "key": "Alt+o", "description": "Open sessionizer (sesh)" },
                 { "key": "Alt+Tab", "description": "Switch to last sesion" },
+                { "key": "Alt+v", "description": "Paste screenshot to claude code" },
                 { "key": "Alt+p", "description": "Open command palette" },
                 { "key": "Alt+m", "description": "Split panes vertically" }
             ]

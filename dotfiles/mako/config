@@ -1,5 +1,5 @@
 anchor=bottom-left
-layer=overlay
+layer=top
 max-visible=-1
 outer-margin=0,0,23,0
 margin=5
@@ -12,6 +12,12 @@ font=hack 9
 background-color=#00ffff
 text-color=#000000
 format=<i>%s</i>\n%b
+
+[mode=hidden]
+invisible=true
+
+[category=minimal]
+format=%b
 
 [category=claude]
 background-color=#a8a8a8

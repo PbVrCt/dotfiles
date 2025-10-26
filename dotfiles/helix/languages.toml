@@ -72,7 +72,7 @@ auto-format = true
 
 [[language]]
 name = "markdown"
-language-servers = [ "marksman", "ltex-ls" ]
+language-servers = [ "marksman" ]
 
 [[language]]
 name = "toml"

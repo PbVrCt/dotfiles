@@ -57,8 +57,8 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
         if [ $? -eq 10 ]; then
             if gum confirm "Initialize restic repository on $DRIVE_LABEL?"; then
                 echo "Initializing $TARGET_REPO" | gum style --foreground 6
-                restic -r "$TARGET_REPO" init --copy-chunker-params
-                sudo chown "$USER":users "$TARGET_REPO"
+                restic init --copy-chunker-params --from-repo "$SOURCE_REPO" -r "$TARGET_REPO"
+                chown "$USER":users "$TARGET_REPO"
             else
                 echo "Skipping $DRIVE_LABEL." | gum style --foreground 3
                 continue

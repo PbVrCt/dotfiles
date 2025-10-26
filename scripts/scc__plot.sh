@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Get an overview of the biggest files/folders in a repostiory.
+# Get an overview of the biggest files/folders in a repository.
 
 # Requires:
 #  https://github.com/boyter/scc

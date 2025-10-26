@@ -185,7 +185,6 @@
     alejandra
     ## Markdown
     marksman
-    ltex-ls
     inlyne
     ## Toml
     taplo
