@@ -1,0 +1,10 @@
+.lock
+
+.venv/
+.env/
+**/__init__.py
+go.sum
+node_modules/
+.nix
+
+log/

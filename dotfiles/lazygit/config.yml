@@ -1,0 +1,29 @@
+gui:
+  scrollHeight: 7 # how many lines you scroll by
+  scrollPastBottom: false # enable scrolling past the bottom
+  sidePanelWidth: 0.2 # number from 0 to 1
+  expandFocusedSidePanel: true
+  showCommandLog: false
+  showBottomLine: false # for hiding the bottom information line (unless it has important information to tell you)
+  showListFooter: false # for seeing the '5 of 20' message in list panels
+  border: 'rounded' # one of 'single' | 'double' | 'rounded' | 'hidden'
+  useHunkModeInStagingView: false
+keybinding:
+  universal:
+    prevItem-alt: 'k' # go one line up
+    nextItem-alt: 'j' # go one line down
+    return: 'h' # return to previous menu, will quit if there's nowhere to return
+    goInto: 'l'
+    nextBlock-alt: '<c-k>' # goto the next block / panel
+    prevBlock-alt: '' # goto the previous block / panel
+    quit: '<c-q>' # alternative/alias of quit
+    copyToClipboard: 'y'
+  copyToClipboardCmd: 'echo {{text}} | wl-copy'
+  editPreset: 'hx'
+git:
+  parseEmoji: true
+  paging:
+    colorArg: always
+    pager: delta --syntax-theme corvus --side-by-side --dark --paging=never
+os:
+  editPreset: 'hx'

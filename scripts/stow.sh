@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Symlink dotfiles to where each program expects theirs.
+
+mkdir -p "$HOME/.config/aichat"
+mkdir -p "$HOME/.config/fcitx5"
+mkdir -p "$HOME/.config/fish"
+mkdir -p "$HOME/.config/ghostty"
+mkdir -p "$HOME/.config/git"
+mkdir -p "$HOME/.config/helix"
+mkdir -p "$HOME/.config/lazygit"
+mkdir -p "$HOME/.config/newsraft"
+mkdir -p "$HOME/.config/yazi"
+mkdir -p "$HOME/.config/river"
+mkdir -p "$HOME/.config/git"
+mkdir -p "$HOME/.claude"
+mkdir -p "$HOME/.config/sioyek"
+mkdir -p "$HOME/.config/mako"
+mkdir -p "$HOME/.config/quickshell"
+mkdir -p "$HOME/.config/nvim"
+
+cd "$HOME/.config/nixos/scripts_as_dotfiles" || exit  
+stow --restow river         -t "$HOME/.config/river"
+stow --restow quickshell    -t "$HOME/.config/quickshell"
+stow --restow lazyvim       -t "$HOME/.config/nvim"
+cd "$HOME/.config/nixos/dotfiles" || exit  
+stow --restow aichat        -t "$HOME/.config/aichat"
+stow --restow fcitx5        -t "$HOME/.config/fcitx5"
+stow --restow fish          -t "$HOME/.config/fish"
+stow --restow ghostty       -t "$HOME/.config/ghostty"
+stow --restow git           -t "$HOME/.config/git"
+stow --restow helix         -t "$HOME/.config/helix"
+stow --restow lazygit       -t "$HOME/.config/lazygit"
+stow --restow newsraft      -t "$HOME/.config/newsraft"
+stow --restow yazi          -t "$HOME/.config/yazi"
+stow --restow tmux          -t "$HOME/"
+stow --restow git           -t "$HOME/.config/git"
+stow --restow claudecode    -t "$HOME/.claude"
+stow --restow sioyek        -t "$HOME/.config/sioyek"
+stow --restow mako          -t "$HOME/.config/mako"
