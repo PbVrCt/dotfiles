@@ -16,7 +16,7 @@ ShellRoot {
 
     property var widgetWidth: 0.4
     property var widgetHeight: 0.95
-    property var maxKeybindsPerColumn: 26
+    property var maxKeybindsPerColumn: 27
     property var title: "Keybind helper"
     property var keybindingGroups: [
         {
@@ -106,6 +106,7 @@ ShellRoot {
                 { "key": "gp", "description": "Go to ~/projects" },
                 { "key": "gc", "description": "Go to ~/.config/nixos" },
                 { "key": "g...", "description": "Go to ..." },
+                { "key": "T", "description": "Toggle preview pane" },
             ]
         },
         {

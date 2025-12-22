@@ -115,13 +115,13 @@ ShellRoot {
         screen: Quickshell.screens[0] // Use primary screen
         
         anchors {
-            left: true
+            right: true
             bottom: true
         }
         
         margins {
-            left: 50
-            bottom: 50
+            right: 30
+            bottom: 70
         }
         
         implicitWidth: Math.max(200, displayContent.implicitWidth + 40)

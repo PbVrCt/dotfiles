@@ -1,8 +1,9 @@
-// Desktop widget that displays the time, date, battery and cpu usage
+// Desktop widget that displays the time, date, battery, cpu usage and whether notifications are in hidden mode
 
 // Requires:
 //   quickshell
 //   upower
+//   makoctl
 
 import QtQuick
 import QtQuick.Layouts
@@ -82,20 +83,20 @@ ShellRoot {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
             }
-            Column {
-                Text {
-                    text: currentTime
-                    color: defaultColor
-                    font { pointSize: 12; family: defaultFont }
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-                Text {
-                    text: currentDate
-                    color: defaultColor
-                    font { pointSize: 9; family: defaultFont }
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-            }
+            // Column {
+            //     Text {
+            //         text: currentTime
+            //         color: defaultColor
+            //         font { pointSize: 12; family: defaultFont }
+            //         anchors.horizontalCenter: parent.horizontalCenter
+            //     }
+            //     Text {
+            //         text: currentDate
+            //         color: defaultColor
+            //         font { pointSize: 9; family: defaultFont }
+            //         anchors.horizontalCenter: parent.horizontalCenter
+            //     }
+            // }
             Column {
                 Text {
                     text: "CPU"

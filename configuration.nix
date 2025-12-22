@@ -95,6 +95,10 @@
     showmethekey
     # File manager tui
     yazi
+    imagemagick
+    poppler_utils
+    ffmpegthumbnailer
+    file
     # File manager gui
     nautilus
     # Browser

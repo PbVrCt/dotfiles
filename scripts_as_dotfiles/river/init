@@ -80,14 +80,14 @@ fi
 riverctl spawn """ghostty --class='chat.term' --title='chat' --window-decoration=auto --gtk-tabs-location=hidden --initial-command='tmux attach -t chat'"""
 riverctl map normal Mod1 h spawn 'sh -c "riverctl toggle-focused-tags 4096; riverctl focus-view next"'
 
-riverctl rule-add -app-id architect.term tags 8192 # 00000000000000000010000000000000
-riverctl rule-add -app-id architect.term float
-riverctl rule-add -app-id architect.term dimensions 1850 1020
-if ! tmux has -t architect 2>/dev/null; then
+riverctl rule-add -app-id aieditor.term tags 8192 # 00000000000000000010000000000000
+riverctl rule-add -app-id aieditor.term float
+riverctl rule-add -app-id aieditor.term dimensions 1850 1020
+if ! tmux has -t aieditor 2>/dev/null; then
   TMUX_LAUNCH="cd $(zoxide query --list | grep "/projects/" | head -n 1); tmux set status off; exec bash"
-  tmux new-session -s architect -d "bash -c '$TMUX_LAUNCH'"
+  tmux new-session -s aieditor -d "bash -c '$TMUX_LAUNCH'"
 fi
-riverctl spawn "ghostty --class='architect.term' --title='architect' --window-decoration=auto --gtk-tabs-location=hidden --initial-command='tmux attach -t architect'"
+riverctl spawn "ghostty --class='aieditor.term' --title='aieditor' --window-decoration=auto --gtk-tabs-location=hidden --initial-command='tmux attach -t aieditor'"
 riverctl map normal Mod1 u spawn 'sh -c "riverctl toggle-focused-tags 8192; riverctl focus-view next"'
 
 riverctl rule-add -app-id news.term tags 16384 # 00000000000000000100000000000000

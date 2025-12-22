@@ -1,4 +1,4 @@
-<img src="./assets/filler.gif" alt="Workspaces scratchpads" width="700">
+<img src="./assets/demo.gif" alt="Demo" width="700">
 
 - [Goals](#goals)
 - [Setup](#setup)
@@ -11,7 +11,7 @@
   - [Patch libraries](#patch-libraries)
   - [Improve error messages](#improve-error-messages)
 - [File structure](#file-structure)
-- [Relevant directories post-setup](#relevant-directories-post-setup)
+- [Common pahts](#common-pahts)
 - [Configuring programs (Stow)](#configuring-programs-stow)
 - [Installing programs](#installing-programs)
 - [Updating packages broadly](#updating-packages-broadly)
@@ -33,8 +33,7 @@
 
 ## Requirements
 
-- 1 spare laptop that is not apple.
- (Apple not covered: I don't use their devices, and the setup for them has differences.)
+- 1 spare laptop that is not apple. (Apple setup differs, and I don't use their devices.)
 - 1 usb.
 - (Optional) Openrouter api key for aichat.
 - (Optional) Claude pro subscription for claude-code.
@@ -113,7 +112,7 @@ exit
 
 8. Add a new host at `host/$HOST/` following the existing examples.
 ```bash
-HOST=vesuvio # Insert laptop brand / volcano name / battleship name ...
+HOST=vesuvio # Insert laptop brand / volcano name / battleship name etc.
 mkdir /home/nixos/.config/nixos/hosts/$HOST -p
 ```
 Copy whatever files your host might use, .e.g., `intel.nix`, `amd.nix`, `nvidia.nix`.
@@ -250,7 +249,7 @@ git:
     USER_NAME: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-Make sure your configuration, including `~/.config/nixos/secrets/sopsnix.nix`, only references secrets you have set in `secrets.yaml`
+Make sure your .nix files using `config.sops.secrets`, including `~/.config/nixos/secrets/sopsnix.nix`, only references secrets you have set in `secrets.yaml`
 
 3. Rebuild:
 ```bash
@@ -298,9 +297,8 @@ Install `pretty_errors`.
 ```bash
 source .venv/bin/activate.fish
 uv pip install pretty_errors
-python -m pretty_errors 
+python -m pretty_errors # Enter to accept the setup wizard defaults
 ```
-> The `pretty_errors` wizard defaults worked for me.
 
 # File structure
 
@@ -312,7 +310,7 @@ python -m pretty_errors
 - `hosts/`: Contains configuration specific the different machines / virtual machines; referenced from `flake.nix`.
 - `secrets/`: Configuration to set up secrets and encrypted secrets file. The private key is somewhere else.
 
-# Relevant directories post-setup
+# Common paths
 
 - `~/projects/`
 - `~/.config/nixos/`: Where the config in this repo lives locally. It didn't necessarily have to be here but I chose this location.
@@ -324,8 +322,7 @@ python -m pretty_errors
 
 Set up a new dotfile:
 1. Add the dotfile in `~/.config/nixos/dotfiles/*/*`
-2. Reference it in `~/.config/nixos/scripts/stow.sh`, so that it is symlinked where the program expects it.
-3. Run `~/.config/nixos/scripts/stow.sh`
+2. Reference it in `~/.config/nixos/scripts/stow.sh`, and run the script, to symlink it where the program expects it.
 
 Update a dotfile::
 1. Edit it.
@@ -360,15 +357,16 @@ Update a dotfile::
 
 # Upgrading/downgrading an specific package or pinning it to an specific version
 
-Strictly as a software consumer, I avoid doing that.
+I avoid doing that.
 If a program doesn't work on my nixpkgs version, I pass on it until it does.
+(When authoring and releasing software I might consider using flakes for that, but not as a consumer)
 
 [How to do it anyways](https://nixos-and-flakes.thiscute.world/nixos-with-flakes/downgrade-or-upgrade-packages)
 
 # Secrets
 
 I use `sops-nix` with secrets that I am comfortable exposing to anyone having access to my machine.
-`sops-nix` lets me access the secrets from my nixos config.
+`sops-nix` enables referencing the secrets from the nixos config.
 The file containing the secrets is encrypted, so it can be commited with the rest of the configuration.
 
 - To edit/add a secret to the secrets file:
@@ -401,7 +399,7 @@ I made scripts for my usual backup sceneraios. They are just thin wrappers aroun
 
 # Todos
 
-- Convenience: Set the development environment remotely.
+- Remote development, convenience, and running AI workloads: Set the development environment remotely.
   Use `tailscale`+`rustdesk` or if `rustdesk` results problematic in Wayland then consider `Wayvnc`.
 - Security: Disk encryption.
 - Security: Acquire a better understanding of how security works on linux, of networking and of tailscale.
