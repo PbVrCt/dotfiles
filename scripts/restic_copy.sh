@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO: Check for security hazards.
+
 # 1. Checks for mounted drives at $MOUNT_DIR.
 # For each drive at $MOUNTPOINT=$MOUNT_DIR/*:
 #    2. Checks for available space. If little, prompts for confirmation.

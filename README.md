@@ -18,7 +18,7 @@
 - [Upgrading/downgrading an specific package or pinning it to an specific version](#upgradingdowngrading-an-specific-package-or-pinning-it-to-an-specific-version)
 - [Secrets](#secrets-1)
 - [Backups](#backups)
-- [Todos](#Todos)
+- [Todo](#Todo)
 - [For reference, things I tried before this](#for-reference-things-i-tried-before-this)
 
 # Goals
@@ -397,25 +397,29 @@ I made scripts for my usual backup sceneraios. They are just thin wrappers aroun
 - `~/.config/nixos/scripts/restic_copy.sh`: Copy the backup to drives.
 - `~/.config/nixos/scripts/restic__backup_and_copy.sh`: Call the above two sequentially.
 
-# Todos
+# TODO
 
-- Remote development, convenience, and running AI workloads: Set the development environment remotely.
-  Use `tailscale`+`rustdesk` or if `rustdesk` results problematic in Wayland then consider `Wayvnc`.
+- Remote development, convenience, and running AI workloads: Setup `tailscale`+`rustdesk`.
+  If `rustdesk` turns out problematic on Wayland then consider `wayvnc`.
+- Developping with LLMs in parallel: Investigate on how are people using worktrees with LLMs, try things,
+  and ponder on how developping with models might look in the future.
+  Adopt a system that seems in the right direction, and allows
+  for operating 2 `claude-code` instances in parallel.
 - Security: Disk encryption.
 - Security: Acquire a better understanding of how security works on linux, of networking and of tailscale.
 
 <details>
-<summary><strong>For reference, things I tried before this:</strong></summary>
+<summary><strong>For reference, things I have already tried:</strong></summary>
 
 - For automating program installation:
-  1. No automation, download from website on `Windows` or use `wget`.
-  2. `Ansible` scripts on `PopOs (Ubuntu)` (too unreliable)
+  1. No automation, download from a website on `Windows` or use `wget`.
+  2. `Ansible` scripts (too unreliable) on `PopOs (Ubuntu)`
   3. `NixOs`
 
 - For managing dotfiles:
   1. Save them 1 by 1 to an usb/cloud and copy them over to a new machine.
   2. `Chezmoi` (too bothersome for a one machine setup)
-  3. `NixOs home-manager` (same as chezmoi, and also it feels like it does too many things under the 'home-manager' umbrella)
+  3. `NixOs home-manager` (same as chezmoi, and also I felt like it does too many things under the 'home-manager' umbrella)
   4. `Gnu Stow`
 
 </details>

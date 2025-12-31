@@ -163,8 +163,7 @@
     ## Python
     python313
     ruff
-    pylyzer
-    pyright
+    basedpyright
     uv
     stdenv.cc
     # Bash
